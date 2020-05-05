@@ -159,4 +159,4 @@ def save_to_sheet(jsons):
                                 sheet['{}{}'.format(col_name[-1],row_number)] = cell_insert
                             break            
                     
-    book.save('license.xlsx')
+    return book

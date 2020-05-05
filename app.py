@@ -1,10 +1,12 @@
 import os
 #import magic
 import urllib.request
-from flask import Flask, flash, request, redirect, render_template,send_file
+from flask import Flask, flash, request, redirect, render_template,send_file,make_response,Response
 from werkzeug.utils import secure_filename
 import vision_api_demo
-
+import flask_excel as excel
+from openpyxl.writer.excel import save_virtual_workbook
+from io import BytesIO
 UPLOAD_FOLDER = './upload_img/'
 
 app = Flask(__name__)
@@ -50,8 +52,12 @@ def upload_file():
 		# 		filename = secure_filename(file.filename)
 		# 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         
-		vision_api_demo.start_detection(files)        
-		return redirect('/download')
+		wb = vision_api_demo.start_detection(files)
+		myfile = BytesIO()
+		myfile.write(save_virtual_workbook(wb))		
+		response = Response(myfile.getvalue(),content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+		return response
+	
 
 if __name__ == "__main__":
     app.run()

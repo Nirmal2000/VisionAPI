@@ -44,4 +44,5 @@ def start_detection(files):
     for file in files:
         
         jsons.append(detect_text(file,file.filename))
-    testing.save_to_sheet(jsons)
+    
+    return testing.save_to_sheet(jsons)
