@@ -14,27 +14,34 @@ def detect_text(path,filename):
     
     """Detects text in the file."""
     client = vision.ImageAnnotatorClient()
-
-    with io.open(path, 'rb') as image_file:
-        content = image_file.read()
+    print(path)
+    content = path.stream.read()
+    # with io.open(path, 'rb') as image_file:
+    #     content = image_file.read()
 
     image = vision.types.Image(content=content)
 
     response = client.text_detection(image=image)
     # json_texts =protobuf_to_dict(response.text_annotations)
     json_texts = MessageToDict(response, preserving_proto_field_name = True)    
-    with open('./jsons/{}.json'.format(filename), 'w', encoding='utf-8') as f:
-        json.dump(json_texts, f, indent=4)
+    # with open('./jsons/{}.json'.format(filename), 'w', encoding='utf-8') as f:
+    #     json.dump(json_texts, f, indent=4)
     
-    testing.save_to_sheet()
+    # testing.save_to_sheet(json_texts)
     # lines = testing.testing_driver('./jsons/10.json')   
     if response.error.message:
         raise Exception(
             '{}\nFor more info on error messages, check: '
             'https://cloud.google.com/apis/design/errors'.format(
                 response.error.message))
+    return json_texts
 
-def start_detection():
-    for img in os.listdir('./upload_img/'): 
-        detect_text('./upload_img/{}'.format(img),img)
-        print(img,": done..") 
+def start_detection(files):
+    # for img in os.listdir('./upload_img/'): 
+    #     detect_text('./upload_img/{}'.format(img),img)
+    #     print(img,": done..") 
+    jsons=[]
+    for file in files:
+        
+        jsons.append(detect_text(file,file.filename))
+    testing.save_to_sheet(jsons)

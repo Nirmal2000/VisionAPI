@@ -43,13 +43,14 @@ def upload_file():
 			flash('No file part')
 			return redirect(request.url)
 		files = request.files.getlist('files[]')
-
-		for file in files:
-			if file and allowed_file(file.filename):
-				filename = secure_filename(file.filename)
-				file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+		# files = request.files['files']
+		# for file in files:
+		# 	if file and allowed_file(file.filename):
+		# 		print(file)
+		# 		filename = secure_filename(file.filename)
+		# 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         
-		vision_api_demo.start_detection()        
+		vision_api_demo.start_detection(files)        
 		return redirect('/download')
 
 if __name__ == "__main__":

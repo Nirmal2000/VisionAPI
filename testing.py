@@ -110,19 +110,14 @@ def check_match(line,i,col_name):
             return parse_month(line,it+1)
     return '-1'
 
-def save_to_sheet():
+def save_to_sheet(jsons):
     book = Workbook()
     sheet  = book.active
     row_number=0
-    all_files = os.listdir('./jsons/')
-    all_files.sort()
+    
 
-    for filename in all_files:    
+    for img_dict in jsons:    
             row_number+=1            
-            path = './jsons/{}'.format(filename)
-            with open(path,'r') as f:
-                img_dict = json.load(f)
-
             word_set = set()
             text_annotations = img_dict['text_annotations'][1:]
 
