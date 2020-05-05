@@ -19,7 +19,6 @@ MarkupSafe==1.1.1
 numpy==1.18.3
 openpyxl==3.0.3
 pandas==1.0.3
-pkg-resources==0.0.0
 protobuf==3.11.3
 protobuf3-to-dict==0.1.5
 pyasn1==0.4.8
