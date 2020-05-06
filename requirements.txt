@@ -10,7 +10,7 @@ google-api-core==1.17.0
 google-auth==1.14.1
 google-cloud-vision==1.0.0
 googleapis-common-protos==1.51.0
-grpcio==1.28.1
+grpcio==1.28.1git 
 gunicorn==20.0.4
 idna==2.9
 itsdangerous==1.1.0
@@ -21,7 +21,6 @@ MarkupSafe==1.1.1
 numpy==1.18.3
 openpyxl==3.0.3
 pandas==1.0.3
-pkg-resources==0.0.0
 protobuf==3.11.3
 protobuf3-to-dict==0.1.5
 pyasn1==0.4.8
