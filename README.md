@@ -15,7 +15,7 @@ export GOOGLE_APPLICATION_CREDENTIALS='path_to_key'
 flask run
 ```
 
-![Driving License]
+![Image of Yaktocat]
 (https://github.com/Nirmal2000/VisionAPI/blob/master/static/9.jpg)
 
 ![Result]
