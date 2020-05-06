@@ -23,12 +23,15 @@ def allowed_file(filename):
 	
 @app.route('/')
 def upload_form():    
+	result = './templates/result.jpg'
+	example = './templates/9.jpg'
 	return render_template('license.html')
 
 @app.route('/download')
 def download_form():
     return render_template('download.html')
-        
+
+
 
 @app.route('/download',methods=['POST'])
 def download_excel():
@@ -61,7 +64,9 @@ def upload_file():
 		for line in wb:
 			for word in line:
 				response_string+=word+','
+			response_string = response_string[:-1]
 			response_string+='\n'
+		
 		response = Response(response_string,content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',headers={"Contentdisposition":"attachment; filename=" + "a.xlsx"})
 		return response
 		

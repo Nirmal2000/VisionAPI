@@ -115,7 +115,8 @@ def save_to_sheet(jsons):
     sheet  = book.active
     row_number=0
     lines_to_ret=[]
-
+    current_line=['Name','Registration No','Registration Date','Manufacturing Date','Engine No','Chassis No.']
+    lines_to_ret.append(current_line)
     for img_dict in jsons:    
             row_number+=1            
             word_set = set()
@@ -144,7 +145,7 @@ def save_to_sheet(jsons):
                             
                 except:
                     pass
-            current_line=['a','a','a','a','a','a']
+            current_line=[None,None,None,None,None,None]
             for line in lines: #Saving to excel
                 
                 for i,word in enumerate(line):        
