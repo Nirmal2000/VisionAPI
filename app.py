@@ -4,6 +4,7 @@ import urllib.request
 from flask import Flask, flash, request, redirect, render_template,send_file,make_response,Response
 from werkzeug.utils import secure_filename
 import vision_api_demo
+from tempfile import NamedTemporaryFile
 import flask_excel as excel
 from openpyxl.writer.excel import save_virtual_workbook
 from io import BytesIO
@@ -53,11 +54,18 @@ def upload_file():
 		# 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         
 		wb = vision_api_demo.start_detection(files)
-		myfile = BytesIO()
-		myfile.write(save_virtual_workbook(wb))		
-		response = Response(myfile.getvalue(),content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+		print(wb)
+		# myfile = BytesIO()		
+		# myfile.write(save_virtual_workbook(wb))		
+		response_string = '' 
+		for line in wb:
+			for word in line:
+				response_string+=word+','
+			response_string+='\n'
+		response = Response(response_string,content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',headers={"Contentdisposition":"attachment; filename=" + "a.xlsx"})
 		return response
-	
+		
+
 
 if __name__ == "__main__":
     app.run()

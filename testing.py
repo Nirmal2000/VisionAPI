@@ -114,7 +114,7 @@ def save_to_sheet(jsons):
     book = Workbook()
     sheet  = book.active
     row_number=0
-    
+    lines_to_ret=[]
 
     for img_dict in jsons:    
             row_number+=1            
@@ -144,7 +144,7 @@ def save_to_sheet(jsons):
                             
                 except:
                     pass
-
+            current_line=['a','a','a','a','a','a']
             for line in lines: #Saving to excel
                 
                 for i,word in enumerate(line):        
@@ -153,10 +153,12 @@ def save_to_sheet(jsons):
                         if(cell_insert == '-1'):
                             continue
                         else:                    
-                            print(cell_insert)
+                            
                             ins_col = ord(col_name[-1]) - ord('A') + 1
+                            current_line[ins_col-1] = cell_insert
                             if(sheet.cell(column=ins_col,row=row_number).value == None):
                                 sheet['{}{}'.format(col_name[-1],row_number)] = cell_insert
                             break            
                     
-    return book
+            lines_to_ret.append(current_line)
+    return lines_to_ret
