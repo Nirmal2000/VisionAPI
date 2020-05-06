@@ -14,3 +14,9 @@ pip install -r requirements.txt
 export GOOGLE_APPLICATION_CREDENTIALS='path_to_key'
 flask run
 ```
+
+![Driving License]
+(https://github.com/Nirmal2000/VisionAPI/blob/master/static/9.jpg)
+
+![Result]
+(https://github.com/Nirmal2000/VisionAPI/blob/master/static/result.jpg)
