@@ -2,6 +2,8 @@
 
 Parses Names, Registration Number, Registration Date, Engine Number, Chassis Number and Manufacturing Date given an image of a driving license to an Excel file
 
+Demo: https://license-vision.herokuapp.com
+
 Create GCP project , activate Cloud Vision API and get service account key
 
 How to run
